@@ -28,6 +28,9 @@ class ContactsController < ApplicationController
 
   def destroy
     # Delete particular record from the view
+    contact = Contact.find(params[:id])
+    contact.destroy
+    render json: contact
   end
 
   private

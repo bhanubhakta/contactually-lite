@@ -20,4 +20,22 @@ jQuery(document).ready(function() {
     }
     ]
   });
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+
+  $(document).on('click', '.delete_record', function(evt) {
+    var $this = $(this);
+    var url = '/contacts/'+$('.delete_record').data().id;
+    $.ajax({
+      url: url,
+      method: 'delete',
+      context: document.body
+    }).done(function() {
+      table.api().draw();
+    });
+  });
 });
