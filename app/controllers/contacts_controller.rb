@@ -1,6 +1,9 @@
 class ContactsController < ApplicationController
   def index
-    
+    respond_to do |format|
+      format.html
+      format.json { render json: ContactDatatable.new(view_context) }
+    end
   end
 
   def upload
@@ -19,5 +22,11 @@ class ContactsController < ApplicationController
 
   def destroy
     
+  end
+
+  private
+  
+  def upload_params
+    params.permit(:file)
   end
 end
