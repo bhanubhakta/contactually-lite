@@ -5,6 +5,7 @@ class FileUploadService
   end
 
   def create
+    binding.pry
     message = {status: 'success', message: 'Uploaded successfully.'}
     begin
       rows = CSV.read(@file.path)

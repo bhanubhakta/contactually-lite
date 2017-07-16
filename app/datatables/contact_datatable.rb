@@ -1,9 +1,12 @@
 class ContactDatatable
-  
+  delegate :params, to: :@view
+
+  # Initlialize datatable with view.
   def initialize(view)
     @view = view
   end
 
+  # Return data as json.
   def as_json(options = {})
     {
       sEcho: params[:sEcho].to_i,
@@ -14,7 +17,7 @@ class ContactDatatable
   end
 
 private
-
+  # Build the required data.
   def data
     contacts.map do |contact|
       [
@@ -28,10 +31,15 @@ private
     end
   end
 
+  # Fetch all the contacts.
   def contacts
     @contacts ||= fetch_contacts
   end
 
+  # Fetch all the contacts
+  # Also the columns are sorted according to the sort clicks.
+  # Filter is applied to email so that email with
+  # particular extension can be filtered out.
   def fetch_contacts
     contacts = Contact.order("#{sort_column} #{sort_direction}")
     contacts = contacts.page(page).per_page(per_page)

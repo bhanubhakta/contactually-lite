@@ -1,5 +1,8 @@
 class ContactsController < ApplicationController
   def index
+    # This is entry point from where
+    # the contacts is displayed in view
+    # from datatable
     respond_to do |format|
       format.html
       format.json { render json: ContactDatatable.new(view_context) }
@@ -7,6 +10,7 @@ class ContactsController < ApplicationController
   end
 
   def upload
+    # File upload service is used for file uploading logic.
     result = FileUploadService.new(upload_params).create
     if result[:status] == 'failed'
       flash[:error] = result[:message]
@@ -17,15 +21,17 @@ class ContactsController < ApplicationController
   end
 
   def new
+    # Get a new contact form.
+    # This also triggers a landing page.
     @contact = Contact.new
   end
 
   def destroy
-    
+    # Delete particular record from the view
   end
 
   private
-  
+
   def upload_params
     params.permit(:file)
   end
