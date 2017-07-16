@@ -54,6 +54,6 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   root 'contacts#new'
-  post 'contacts#upload'
+  post '/contacts/upload' => 'contacts#upload'
   resources :contacts, only: [:index, :new, :destroy]
 end
