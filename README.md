@@ -35,3 +35,13 @@ to **hw@contactually.com**.
 
 **NOTE:**
 Your application *does not* need to handle authentication or authorization.
+
+Run the following:
+
+1. Run bundle install
+
+2. To migrate database:
+    bundle exec rake db:migrate
+    
+3. To run spec:
+    bundle exec rspec spec
