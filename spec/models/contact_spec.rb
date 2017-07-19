@@ -9,25 +9,23 @@ describe Contact do
 
   context 'creating record' do
     subject { Contact.create(record) }
-
+    let(:record) do
+      {
+        first_name: 'Bhanu',
+        last_name: 'Sigdel',
+        email_address: 'abc@def.com',
+        phone_number: '1234567890',
+        company_name: 'Contactually'
+      }
+    end
     context 'wrong email address' do
-      let(:record) do
-        {
-          first_name: 'Bhanu',
-          last_name: 'Sigdel',
-          email_address: 'abc@def.com',
-          phone_number: '1234567890',
-          company_name: 'Contactually'
-        }
-      end
-
       it 'should create a record' do
-        expect{subject}.to change{Contact.count}.by(1)
+        expect { subject }.to change { Contact.count }.by(1)
       end
     end
 
     context 'wrong email address' do
-      let(:record) do 
+      let(:record) do
         {
           first_name: 'Bhanu',
           last_name: 'Sigdel',
@@ -38,7 +36,7 @@ describe Contact do
       end
 
       it 'not create the record' do
-        expect{subject}.to change{Contact.count}.by(0)
+        expect { subject }.to change { Contact.count }.by(0)
       end
     end
   end

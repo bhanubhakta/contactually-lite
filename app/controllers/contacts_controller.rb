@@ -14,10 +14,12 @@ class ContactsController < ApplicationController
     result = FileUploadService.new(upload_params).create
     if result[:status] == 'failed'
       flash[:error] = result[:message]
-      redirect_to root_path and return
+      path = root_path
+    else
+      path = contacts_path
+      flash[:success] = result[:message]
     end
-    flash[:success] = result[:message]
-    redirect_to contacts_path
+    redirect_to path
   end
 
   def new

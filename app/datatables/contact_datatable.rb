@@ -7,7 +7,7 @@ class ContactDatatable
   end
 
   # Return data as json.
-  def as_json(options = {})
+  def as_json(*)
     {
       sEcho: params[:sEcho].to_i,
       iTotalRecords: Contact.count,
@@ -16,7 +16,8 @@ class ContactDatatable
     }
   end
 
-private
+  private
+
   # Build the required data.
   def data
     contacts.map do |contact|
@@ -44,13 +45,13 @@ private
     contacts = Contact.order("#{sort_column} #{sort_direction}")
     contacts = contacts.page(page).per_page(per_page)
     if params[:sSearch].present?
-      contacts = contacts.where("email_address like :search", search: "%#{params[:sSearch]}%")
+      contacts = contacts.where('email_address like :search", search: "%#{params[:sSearch]}%')
     end
     contacts
   end
 
   def page
-    params[:iDisplayStart].to_i/per_page + 1
+    params[:iDisplayStart].to_i / per_page + 1
   end
 
   def per_page
@@ -58,11 +59,11 @@ private
   end
 
   def sort_column
-    columns = %w[first_name last_name email_address phone_number company_name]
+    columns = %w(first_name last_name email_address phone_number company_name)
     columns[params[:iSortCol_0].to_i]
   end
 
   def sort_direction
-    params[:sSortDir_0] == "desc" ? "desc" : "asc"
+    params[:sSortDir_0] == 'desc' ? 'desc' : 'asc'
   end
 end
