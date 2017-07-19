@@ -45,7 +45,7 @@ class ContactDatatable
     contacts = Contact.order("#{sort_column} #{sort_direction}")
     contacts = contacts.page(page).per_page(per_page)
     if params[:sSearch].present?
-      contacts = contacts.where('email_address like :search", search: "%#{params[:sSearch]}%')
+      contacts = contacts.where('email_address like :search', search: "%#{params[:sSearch]}%")
     end
     contacts
   end
